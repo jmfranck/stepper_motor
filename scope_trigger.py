@@ -15,7 +15,8 @@ def trigger_scope(wait=1e-6):
     g.output(21,True)
     time.sleep(wait)
     g.output(21,False)
-for j in range(10000):
-    trigger_scope()
-    time.sleep(0.001)
+if __name__ == '__main__':
+    for j in range(10000):
+        trigger_scope()
+        time.sleep(0.001)
 

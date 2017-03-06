@@ -1,4 +1,3 @@
-
 import RPi.GPIO as GPIO
 import time
 GPIO.setmode(GPIO.BCM)
@@ -15,26 +14,25 @@ GPIO.setup(MS3pin, GPIO.OUT)
 GPIO.setup(DIRpin, GPIO.OUT)
 GPIO.setup(STEPpin, GPIO.OUT)
 
-forward_seq = ['10110','11111','11100','10100
-reverse_seq = list(forward_seq)
-reverse_seq.reverse()
-
 def forward(delay,steps):
-        for i in range(steps):
-                set_step('00000')
-		time.sleep(1e-6)
-		set_step('00001')
-		set_step('10001')
-		time.slep(1e-6)
-		set_step('00000')
-		time.sleep(delay)
+    for i in range(steps):
+        set_step('00000')
+        time.sleep(1e-6)
+        set_step('00001')
+        set_step('10001')
+        time.sleep(1e-6)
+        set_step('00000')
+        time.sleep(delay)
 
-def forward(delay,steps):
-	for i in range(steps):
-		set_step('00000')
-		set_step('10001')
-		time.sleep(1e-6)
-		set_step('00000')
+def backward(delay,steps):
+    for i in range(steps):
+        set_step('00000')
+        time.sleep(1e-6)
+        set_step('00000')
+        set_step('10000')
+        time.sleep(1e-6)
+        set_step('00000')
+        time.sleep(delay)
 
 def set_step(step_str):
         assert len(step_str) == 5,"the string step_str is the wrong length"
@@ -42,17 +40,13 @@ def set_step(step_str):
         GPIO.output(MS1pin, step_str[1] == '1')
         GPIO.output(MS2pin, step_str[2] == '1')
         GPIO.output(MS3pin, step_str[3] == '1')
-        GPIO.output(DIRpin, step_str[5] == '1') as GPIO
-
-
-
+        GPIO.output(DIRpin, step_str[4] == '1')
 
 while True:
-	set_step('00000')
-	delay = raw_input("Delay between steps (milliseconds)?")
-	steps = raw_input("How many steps forward?")
-	forward(int(delay/1000.0, int(steps))
-	set_step('00000')
-	steps = raw_input("How many steps backwards?")
-	backwards(int(delay)/1000.0, int(steps))
-
+    set_step('00000')
+    delay = raw_input("Delay between steps (milliseconds)?")
+    steps = raw_input("How many steps forward?")
+    forward(int(delay)/1000.0, int(steps))
+    set_step('00000')
+    steps = raw_input("How many steps backwards?")
+    backward(int(delay)/1000.0, int(steps))

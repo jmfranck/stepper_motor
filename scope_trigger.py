@@ -2,6 +2,7 @@ import RPi.GPIO as g
 import time
 g.setmode(g.BCM)
 g.setup(21,g.OUT)
+#g.setup(12,g.OUT)
 def trigger_scope(wait=1e-6):
     """Just quickly flashes the voltage on the scope on GPIO21, which can then be used as a trigger.
 
@@ -13,8 +14,10 @@ def trigger_scope(wait=1e-6):
     g.output(21,False)
     time.sleep(wait)
     g.output(21,True)
+    #g.output(12,True)
     time.sleep(wait)
     g.output(21,False)
+    #g.output(12,False) 
 if __name__ == '__main__':
     for j in range(10000):
         trigger_scope()

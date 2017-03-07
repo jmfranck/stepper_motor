@@ -1,5 +1,6 @@
 import RPi.GPIO as GPIO
 import time
+from scope_trigger import trigger_scope
 GPIO.setmode(GPIO.BCM)
 MS1pin = 4
 MS2pin = 17
@@ -16,6 +17,7 @@ GPIO.setup(STEPpin, GPIO.OUT)
 
 def forward(delay,steps):
     for i in range(steps):
+        trigger_scope()
         set_step('00000')
         time.sleep(1e-6)
         set_step('00001')

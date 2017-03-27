@@ -26,16 +26,16 @@ def forward(delay,steps):
         set_step('00000')
         time.sleep(delay)
 
-def backward(delay,steps):
-    for i in range(steps):
-        set_step('00000')
-        time.sleep(1e-6)
-        set_step('00000')
-        set_step('10000')
-        time.sleep(1e-6)
-        set_step('00000')
-        time.sleep(delay)
-
+#def backward(delay,steps):
+#    for i in range(steps):
+#        set_step('00000')
+#        time.sleep(1e-6)
+#        set_step('00000')
+#        set_step('10000')
+#        time.sleep(1e-6)
+#        set_step('00000')
+#        time.sleep(delay)
+#
 def set_step(step_str):
         assert len(step_str) == 5,"the string step_str is the wrong length"
         GPIO.output(STEPpin, step_str[0] == '1')
@@ -50,5 +50,5 @@ while True:
     steps = raw_input("How many steps forward?")
     forward(int(delay)/1000.0, int(steps))
     set_step('00000')
-    steps = raw_input("How many steps backwards?")
-    backward(int(delay)/1000.0, int(steps))
+    #steps = raw_input("How many steps backwards?")
+    #backward(int(delay)/1000.0, int(steps))

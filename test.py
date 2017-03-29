@@ -20,8 +20,8 @@ def forward(delay,steps):
         trigger_scope()
         set_step('00000')
         time.sleep(1e-6)
-        set_step('00001')
-        set_step('10001')
+        set_step('00101')
+        set_step('10101')
         time.sleep(1e-6)
         set_step('00000')
         time.sleep(delay)
@@ -46,9 +46,9 @@ def set_step(step_str):
 
 #while True:
 set_step('00000')
-delay = raw_input("Delay between steps (milliseconds)?")
-steps = raw_input("How many steps forward?")
-forward(int(delay)/1000.0, int(steps))
+delay = raw_input("Delay between steps (microseconds)?")
+howlong = raw_input("Step for how long (seconds)")
+forward(int(delay)*1e-6, int(int(howlong)/(int(delay)*1e-6)))
 set_step('00000')
 #steps = raw_input("How many steps backwards?")
 #backward(int(delay)/1000.0, int(steps))

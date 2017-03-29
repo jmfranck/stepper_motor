@@ -44,11 +44,12 @@ def set_step(step_str):
         GPIO.output(MS3pin, step_str[3] == '1')
         GPIO.output(DIRpin, step_str[4] == '1')
 
-while True:
-    set_step('00000')
-    delay = raw_input("Delay between steps (milliseconds)?")
-    steps = raw_input("How many steps forward?")
-    forward(int(delay)/1000.0, int(steps))
-    set_step('00000')
-    #steps = raw_input("How many steps backwards?")
-    #backward(int(delay)/1000.0, int(steps))
+#while True:
+set_step('00000')
+delay = raw_input("Delay between steps (milliseconds)?")
+steps = raw_input("How many steps forward?")
+forward(int(delay)/1000.0, int(steps))
+set_step('00000')
+#steps = raw_input("How many steps backwards?")
+#backward(int(delay)/1000.0, int(steps))
+GPIO.cleanup()
